@@ -33,14 +33,15 @@ public class Repository {
         }
     }
 
-    /*------ SIGNUP ------*/
-    public boolean signup(String username, String name, String email, String password, String dob){
-        boolean isSigned = false;
 
+    /*------ SIGNUP ------*/
+    public UserStatusCall signup(String username, String name, String email, String password, String dob){
         try {
-            preparedStatement = connection.prepareStatement("select username from users where username = ?");
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
+            if(isUserAvailable(username))
+                return new UserStatusCall("USER EXIST");
+
+            if(isEmailAvailable(email))
+                return new UserStatusCall("EMAIL EXIST");
 
             if(!resultSet.next()){
                 // username, passwordHash, name, email, dob, joinedDate
@@ -52,7 +53,6 @@ public class Repository {
                 preparedStatement.setString(4, email);
                 preparedStatement.setString(5, dob);
                 preparedStatement.executeUpdate();
-                isSigned = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,8 +65,37 @@ public class Repository {
             }
         }
 
-        return isSigned;
+        return new UserStatusCall("SUCCESS");
     }
+
+    private boolean isUserAvailable(String userId){
+        try{
+            preparedStatement = connection.prepareStatement("select username from users where username = ?");
+            preparedStatement.setString(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+                return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    private boolean isEmailAvailable(String email){
+        try{
+            preparedStatement = connection.prepareStatement("select username from users where email = ?");
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+                return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
 
     /*------ LOGIN ------*/
     public UserStatusCall login(String username, String password){
@@ -88,6 +117,7 @@ public class Repository {
         return new UserStatusCall("NOT EXISTS");
     }
 
+
     /*------ POST TWEET ------*/
     public boolean postTweet(User user, String tweet){
         boolean isPosted = false;
@@ -105,6 +135,7 @@ public class Repository {
         return isPosted;
     }
 
+
     /*------ VIEW MY TWEETS ------*/
     public ResultSet viewMyTweets(User user) {
         try {
@@ -117,6 +148,7 @@ public class Repository {
 
         return resultSet;
     }
+
 
     /*------ DELETE TWEET ------*/
     public boolean deleteTweet(User user, String tweetId) {
@@ -133,6 +165,7 @@ public class Repository {
 
         return isDeleted;
     }
+
 
     /*------ FOLLOW USER ------*/
     public FollowUserStatusCall followUser(User user, String userId){
@@ -152,20 +185,6 @@ public class Repository {
         return new FollowUserStatusCall("SUCCESS");
     }
 
-    private boolean isUserAvailable(String userId){
-        try{
-            preparedStatement = connection.prepareStatement("select username from users where username = ?");
-            preparedStatement.setString(1, userId);
-            resultSet = preparedStatement.executeQuery();
-            if(!resultSet.next())
-                return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
-
     private boolean isFollowingUser(String username, String userId){
         try{
             preparedStatement = connection.prepareStatement("select * from relationship where follower = ? and following = ?");
@@ -182,6 +201,7 @@ public class Repository {
         return false;
     }
 
+
     /*------ VIEW FOLLOWING ------*/
     public ResultSet viewFollowing(User user){
         try{
@@ -195,6 +215,7 @@ public class Repository {
 
         return null;
     }
+
 
     /*------ VIEW FOLLOWERS ------*/
     public ResultSet viewFollower(User user){
@@ -210,12 +231,14 @@ public class Repository {
         return null;
     }
 
+
     /*------ VIEW TWEETS ------*/
     public ResultSet viewTweets(User user){
         try{
-            String query = "select * from posts where username in (select following from relationship where follower=?) order by postTime desc";
+            String query = "select * from posts where username in (select following from relationship where follower=?) or username=? order by postTime desc";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getUsername());
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -223,6 +246,7 @@ public class Repository {
 
         return resultSet;
     }
+
 
     /*------ HASHING ------*/
     private String hashPassword(String password){

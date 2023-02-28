@@ -28,6 +28,7 @@ public class HomeView implements HomeViewCallback {
         System.out.println("5. Follower user");
         System.out.println("6. View followers");
         System.out.println("7. View following");
+        System.out.println("8. Goto home");
         System.out.println("9. Exit twitter");
         System.out.print("Enter option: ");
         String option = scanner.nextLine();

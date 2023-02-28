@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97ef29ff-47f7-457b-bd0f-d49a331146bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TwitterConsole.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twitterconsole/home/HomeView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twitterconsole/home/HomeView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twitterconsole/repository/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twitterconsole/repository/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupModelControllerCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupModelControllerCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twitterconsole/signup/SignupView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

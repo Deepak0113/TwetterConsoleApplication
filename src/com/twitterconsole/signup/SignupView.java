@@ -12,10 +12,6 @@ public class SignupView implements SignupViewCallback {
         signupController = new SignupController(this);
     }
 
-    public static void main(String[] args) {
-        new SignupView().startSignup();
-    }
-
     /*------ NAVIGATION ------*/
     public void startSignup(){
         System.out.println("\n1. Continue signup");

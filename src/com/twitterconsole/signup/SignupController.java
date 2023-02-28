@@ -53,8 +53,8 @@ public class SignupController implements SignupViewControllerCallback, SignupMod
     }
 
     @Override
-    public void userExist() {
-        signupView.invalidMessage("\nUser already exists");
+    public void invalidMessage(String message) {
+        signupView.invalidMessage("\n" + message);
     }
 
     @Override
